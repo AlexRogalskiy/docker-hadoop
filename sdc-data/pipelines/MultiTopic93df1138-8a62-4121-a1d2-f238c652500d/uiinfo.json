@@ -1,0 +1,43 @@
+{
+  ":pipeline:" : {
+    "previewConfig" : {
+      "previewSource" : "CONFIGURED_SOURCE",
+      "batchSize" : 10,
+      "timeout" : 30000,
+      "writeToDestinations" : true,
+      "executeLifecycleEvents" : false,
+      "showHeader" : true,
+      "showFieldType" : true,
+      "rememberMe" : false
+    }
+  },
+  "KafkaMultitopicConsumer_01" : {
+    "yPos" : 47,
+    "stageType" : "SOURCE",
+    "rawSource" : {
+      "configuration" : [ {
+        "name" : "brokerHost",
+        "value" : "localhost"
+      }, {
+        "name" : "brokerPort",
+        "value" : 9092
+      }, {
+        "name" : "topic",
+        "value" : "myTopic"
+      }, {
+        "name" : "pollTimeout",
+        "value" : 1000
+      } ]
+    },
+    "description" : "",
+    "label" : "Kafka Multitopic Consumer 1",
+    "xPos" : 60
+  },
+  "LocalFS_01" : {
+    "description" : "",
+    "label" : "Local FS 1",
+    "xPos" : 467,
+    "yPos" : 162,
+    "stageType" : "TARGET"
+  }
+}

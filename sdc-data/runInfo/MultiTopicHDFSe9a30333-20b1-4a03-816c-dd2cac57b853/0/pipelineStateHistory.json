@@ -1,0 +1,16 @@
+{
+  "pipelineId" : "MultiTopicHDFSe9a30333-20b1-4a03-816c-dd2cac57b853",
+  "rev" : "0",
+  "user" : "admin",
+  "status" : "EDITED",
+  "message" : "Pipeline edited",
+  "timeStamp" : 1582294150289,
+  "attributes" : {
+    "IS_REMOTE_PIPELINE" : false
+  },
+  "executionMode" : "STANDALONE",
+  "metrics" : null,
+  "retryAttempt" : 0,
+  "nextRetryTimeStamp" : 0,
+  "name" : "MultiTopicHDFSe9a30333-20b1-4a03-816c-dd2cac57b853"
+}
