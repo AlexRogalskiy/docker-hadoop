@@ -4,7 +4,7 @@
   "pipelineId" : "MultiTopicHDFSe9a30333-20b1-4a03-816c-dd2cac57b853",
   "title" : "MultiTopicHDFS",
   "description" : "",
-  "uuid" : "8d5fe542-95c5-4edb-b5f8-c18675eee7e4",
+  "uuid" : "f7dd0730-8987-48c1-8bc7-5cb923eb6426",
   "configuration" : [ {
     "name" : "executionMode",
     "value" : "STANDALONE"
@@ -520,7 +520,7 @@
       "value" : "sdc-${sdc:id()}"
     }, {
       "name" : "hdfsTargetConfigBean.fileNameSuffix",
-      "value" : ".avro"
+      "value" : "*.avro"
     }, {
       "name" : "hdfsTargetConfigBean.dirPathTemplateInHeader",
       "value" : false
@@ -743,11 +743,11 @@
     "title" : "MultiTopicHDFS",
     "description" : "",
     "created" : 1582294150172,
-    "lastModified" : 1582644003001,
+    "lastModified" : 1583742982338,
     "creator" : "admin",
     "lastModifier" : "admin",
     "lastRev" : "0",
-    "uuid" : "b2d461ae-a33f-429e-9c2e-c660c4328c36",
+    "uuid" : "677368ef-e020-4033-acbc-075e6c8bd64a",
     "valid" : true,
     "metadata" : {
       "labels" : [ ]
