@@ -1,0 +1,54 @@
+{
+  "Directory_01" : {
+    "yPos" : 51,
+    "stageType" : "SOURCE",
+    "rawSource" : {
+      "configuration" : [ {
+        "name" : "fileName"
+      } ]
+    },
+    "description" : "",
+    "label" : "Directory 1",
+    "xPos" : 61
+  },
+  "JythonEvaluator_01" : {
+    "description" : "",
+    "label" : "Jython Evaluator 1",
+    "xPos" : 501,
+    "yPos" : 51,
+    "stageType" : "PROCESSOR"
+  },
+  ":pipeline:" : {
+    "previewConfig" : {
+      "previewSource" : "CONFIGURED_SOURCE",
+      "batchSize" : 10,
+      "timeout" : 30000,
+      "writeToDestinations" : true,
+      "executeLifecycleEvents" : true,
+      "showHeader" : false,
+      "showFieldType" : true,
+      "rememberMe" : false
+    }
+  },
+  "StreamSelector_01" : {
+    "description" : "",
+    "label" : "Stream Selector 1",
+    "xPos" : 281,
+    "yPos" : 51,
+    "stageType" : "PROCESSOR"
+  },
+  "FieldMasker_01" : {
+    "description" : "",
+    "label" : "Field Masker 1",
+    "xPos" : 721,
+    "yPos" : 51,
+    "stageType" : "PROCESSOR"
+  },
+  "LocalFS_01" : {
+    "description" : "",
+    "label" : "Local FS 1",
+    "xPos" : 941,
+    "yPos" : 51,
+    "stageType" : "TARGET"
+  }
+}
