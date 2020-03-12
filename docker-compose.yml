@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+  # HDFS container
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
     container_name: namenode
@@ -15,6 +16,7 @@ services:
     env_file:
       - ./hadoop.env
 
+  # HDFS container
   datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
     container_name: datanode
@@ -26,6 +28,7 @@ services:
     env_file:
       - ./hadoop.env
 
+  # Kafka container
   kafka:
     image: krisgeus/docker-kafka
     environment:
