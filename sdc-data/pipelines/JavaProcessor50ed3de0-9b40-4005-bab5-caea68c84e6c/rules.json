@@ -10,7 +10,7 @@
     "condition" : "${value() > 100}",
     "sendEmail" : false,
     "enabled" : false,
-    "timestamp" : 1582294150316,
+    "timestamp" : 1583670600544,
     "valid" : true
   }, {
     "id" : "stageErrorAlertID",
@@ -21,7 +21,7 @@
     "condition" : "${value() > 100}",
     "sendEmail" : false,
     "enabled" : false,
-    "timestamp" : 1582294150316,
+    "timestamp" : 1583670600544,
     "valid" : true
   }, {
     "id" : "idleGaugeID",
@@ -32,7 +32,7 @@
     "condition" : "${time:now() - value() > 120000}",
     "sendEmail" : false,
     "enabled" : false,
-    "timestamp" : 1582294150316,
+    "timestamp" : 1583670600544,
     "valid" : true
   }, {
     "id" : "batchTimeAlertID",
@@ -43,29 +43,12 @@
     "condition" : "${value() > 200}",
     "sendEmail" : false,
     "enabled" : false,
-    "timestamp" : 1582294150316,
+    "timestamp" : 1583670600544,
     "valid" : true
   } ],
-  "dataRuleDefinitions" : [ {
-    "id" : "dataRule1583751269032",
-    "label" : "qwerty",
-    "lane" : "KafkaMultitopicConsumer_01OutputLane15822941570860",
-    "samplingPercentage" : 100.0,
-    "samplingRecordsToRetain" : 10,
-    "condition" : "true",
-    "alertEnabled" : false,
-    "alertText" : "",
-    "thresholdType" : "COUNT",
-    "thresholdValue" : "100",
-    "minVolume" : 1000,
-    "meterEnabled" : true,
-    "sendEmail" : false,
-    "enabled" : true,
-    "timestamp" : 0,
-    "valid" : true
-  } ],
+  "dataRuleDefinitions" : [ ],
   "driftRuleDefinitions" : [ ],
-  "uuid" : "a226349c-283a-41b0-b611-cc816c20e117",
+  "uuid" : "06c66ec7-0962-4e07-b998-890e23a5fa39",
   "configuration" : [ {
     "name" : "emailIDs",
     "value" : [ ]

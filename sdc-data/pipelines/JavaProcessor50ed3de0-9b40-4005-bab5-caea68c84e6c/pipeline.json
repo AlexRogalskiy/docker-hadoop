@@ -1,10 +1,10 @@
 {
   "schemaVersion" : 6,
   "version" : 13,
-  "pipelineId" : "CustomProcessord765ccb1-cdd5-478b-9179-799bd8d47ee4",
-  "title" : "CustomProcessor",
+  "pipelineId" : "JavaProcessor50ed3de0-9b40-4005-bab5-caea68c84e6c",
+  "title" : "Java Processor",
   "description" : "",
-  "uuid" : "ce13ff6d-d864-4a93-880a-c0742ed965e2",
+  "uuid" : "e01c0bfe-4967-4acd-94a2-00d1ee2828a9",
   "configuration" : [ {
     "name" : "executionMode",
     "value" : "STANDALONE"
@@ -509,307 +509,6 @@
     "outputLanes" : [ "Directory_01OutputLane15836731079590" ],
     "eventLanes" : [ ],
     "services" : [ ]
-  }, {
-    "instanceName" : "StreamSelector_01",
-    "library" : "streamsets-datacollector-basic-lib",
-    "stageName" : "com_streamsets_pipeline_stage_processor_selector_SelectorDProcessor",
-    "stageVersion" : "1",
-    "configuration" : [ {
-      "name" : "lanePredicates",
-      "value" : [ {
-        "outputLane" : "StreamSelector_01OutputLane1583676713968",
-        "predicate" : "${record:value('/payment_type') == 'CRD'}"
-      }, {
-        "outputLane" : "StreamSelector_01OutputLane1583676552194",
-        "predicate" : "default"
-      } ]
-    }, {
-      "name" : "stageOnRecordError",
-      "value" : "TO_ERROR"
-    }, {
-      "name" : "stageRequiredFields",
-      "value" : [ "/payment_type" ]
-    }, {
-      "name" : "stageRecordPreconditions",
-      "value" : [ ]
-    } ],
-    "uiInfo" : {
-      "description" : "",
-      "label" : "Stream Selector 1",
-      "xPos" : 281,
-      "yPos" : 51,
-      "stageType" : "PROCESSOR"
-    },
-    "inputLanes" : [ "Directory_01OutputLane15836731079590" ],
-    "outputLanes" : [ "StreamSelector_01OutputLane1583676713968", "StreamSelector_01OutputLane1583676552194" ],
-    "eventLanes" : [ ],
-    "services" : [ ]
-  }, {
-    "instanceName" : "JythonEvaluator_01",
-    "library" : "streamsets-datacollector-jython_2_7-lib",
-    "stageName" : "com_streamsets_pipeline_stage_processor_jython_JythonDProcessor",
-    "stageVersion" : "3",
-    "configuration" : [ {
-      "name" : "processingMode",
-      "value" : "BATCH"
-    }, {
-      "name" : "initScript",
-      "value" : "#\n# Available Objects:\n#\n#  state: a dict that is preserved between invocations of this script. \n#         Useful for caching bits of data e.g. counters.\n#\n#  log.<loglevel>(msg, obj...): use instead of print to send log messages to the log4j log instead of stdout.\n#                               loglevel is any log4j level: e.g. info, error, warn, trace.\n#  sdcFunctions.getFieldNull(Record, 'field path'): Receive a constant defined above \n#                                  to check if the field is typed field with value null\n#  sdcFunctions.createMap(boolean listMap): Create a map for use as a field in a record.\n#                            Pass True to this function to create a list map (ordered map)\n#\n\n# state['connection'] = Connection().open()"
-    }, {
-      "name" : "script",
-      "value" : "try: \n  for record in records:\n    cc = record.value['credit_card']\n    if cc == '':\n      error.write(record, \"Payment type was CRD, but credit card was null\")\n      continue\n\n    cc_type = ''\n    if cc.startswith('4'):\n      cc_type = 'Visa'\n    elif cc.startswith(('51','52','53','54','55')):\n      cc_type = 'MasterCard'\n    elif cc.startswith(('34','37')):\n      cc_type = 'AMEX'\n    elif cc.startswith(('300','301','302','303','304','305','36','38')):\n      cc_type = 'Diners Club'\n    elif cc.startswith(('6011','65')):\n      cc_type = 'Discover'\n    elif cc.startswith(('2131','1800','35')):\n      cc_type = 'JCB'\n    else:\n      cc_type = 'Other'\n\n    record.value['credit_card_type'] = cc_type\n\n    output.write(record)\nexcept Exception as e:\n  error.write(record, e.message)"
-    }, {
-      "name" : "destroyScript",
-      "value" : "#\n# Available Objects:\n#\n#  state: a dict that is preserved between invocations of this script. \n#         Useful for caching bits of data e.g. counters.\n#\n#  log.<loglevel>(msg, obj...): use instead of print to send log messages to the log4j log instead of stdout.\n#                               loglevel is any log4j level: e.g. info, error, warn, trace.\n#  sdcFunctions.getFieldNull(Record, 'field path'): Receive a constant defined above \n#                                  to check if the field is typed field with value null\n#  sdcFunctions.createMap(boolean listMap): Create a map for use as a field in a record.\n#                            Pass True to this function to create a list map (ordered map)\n#  sdcFunctions.createEvent(String type, int version): Creates a new event.\n#                            Create new empty event with standard headers.\n#  sdcFunctions.toEvent(Record): Send event to event stream\n#                            Only events created with sdcFunctions.createEvent are supported.\n#\n\n# state['connection'].close()"
-    }, {
-      "name" : "scriptRecordType",
-      "value" : "NATIVE_OBJECTS"
-    }, {
-      "name" : "stageOnRecordError",
-      "value" : "TO_ERROR"
-    }, {
-      "name" : "stageRequiredFields",
-      "value" : [ ]
-    }, {
-      "name" : "stageRecordPreconditions",
-      "value" : [ ]
-    } ],
-    "uiInfo" : {
-      "description" : "",
-      "label" : "Jython Evaluator 1",
-      "xPos" : 502,
-      "yPos" : 50,
-      "stageType" : "PROCESSOR"
-    },
-    "inputLanes" : [ "StreamSelector_01OutputLane1583676713968" ],
-    "outputLanes" : [ "JythonEvaluator_01OutputLane15836775202340" ],
-    "eventLanes" : [ ],
-    "services" : [ ]
-  }, {
-    "instanceName" : "FieldMasker_01",
-    "library" : "streamsets-datacollector-basic-lib",
-    "stageName" : "com_streamsets_pipeline_stage_processor_fieldmask_FieldMaskDProcessor",
-    "stageVersion" : "1",
-    "configuration" : [ {
-      "name" : "fieldMaskConfigs",
-      "value" : [ {
-        "fields" : [ "/credit_card" ],
-        "maskType" : "REGEX",
-        "regex" : "(.*)([0-9]{4})",
-        "groupsToShow" : "2"
-      } ]
-    }, {
-      "name" : "stageOnRecordError",
-      "value" : "TO_ERROR"
-    }, {
-      "name" : "stageRequiredFields",
-      "value" : [ ]
-    }, {
-      "name" : "stageRecordPreconditions",
-      "value" : [ ]
-    } ],
-    "uiInfo" : {
-      "description" : "",
-      "label" : "Field Masker 1",
-      "xPos" : 721,
-      "yPos" : 51,
-      "stageType" : "PROCESSOR"
-    },
-    "inputLanes" : [ "JythonEvaluator_01OutputLane15836775202340" ],
-    "outputLanes" : [ "FieldMasker_01OutputLane15836784576570" ],
-    "eventLanes" : [ ],
-    "services" : [ ]
-  }, {
-    "instanceName" : "LocalFS_01",
-    "library" : "streamsets-datacollector-basic-lib",
-    "stageName" : "com_streamsets_pipeline_stage_destination_localfilesystem_LocalFileSystemDTarget",
-    "stageVersion" : "3",
-    "configuration" : [ {
-      "name" : "configs.uniquePrefix",
-      "value" : "out_"
-    }, {
-      "name" : "configs.fileNameSuffix",
-      "value" : null
-    }, {
-      "name" : "configs.dirPathTemplateInHeader",
-      "value" : false
-    }, {
-      "name" : "configs.dirPathTemplate",
-      "value" : "/tmp/out"
-    }, {
-      "name" : "configs.timeZoneID",
-      "value" : "UTC"
-    }, {
-      "name" : "configs.timeDriver",
-      "value" : "${time:now()}"
-    }, {
-      "name" : "configs.maxRecordsPerFile",
-      "value" : 0
-    }, {
-      "name" : "configs.maxFileSize",
-      "value" : 3
-    }, {
-      "name" : "configs.idleTimeout",
-      "value" : "${1 * HOURS}"
-    }, {
-      "name" : "configs.compression",
-      "value" : "NONE"
-    }, {
-      "name" : "configs.otherCompression",
-      "value" : null
-    }, {
-      "name" : "configs.fileType",
-      "value" : "TEXT"
-    }, {
-      "name" : "configs.keyEl",
-      "value" : "${uuid()}"
-    }, {
-      "name" : "configs.lateRecordsLimit",
-      "value" : "${1 * HOURS}"
-    }, {
-      "name" : "configs.rollIfHeader",
-      "value" : false
-    }, {
-      "name" : "configs.rollHeaderName",
-      "value" : "roll"
-    }, {
-      "name" : "configs.lateRecordsAction",
-      "value" : "SEND_TO_ERROR"
-    }, {
-      "name" : "configs.lateRecordsDirPathTemplate",
-      "value" : "/tmp/late/${YYYY()}-${MM()}-${DD()}"
-    }, {
-      "name" : "configs.dataFormat",
-      "value" : "DELIMITED"
-    }, {
-      "name" : "configs.hdfsPermissionCheck",
-      "value" : true
-    }, {
-      "name" : "configs.permissionEL",
-      "value" : null
-    }, {
-      "name" : "configs.skipOldTempFileRecovery",
-      "value" : false
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.charset",
-      "value" : "UTF-8"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.csvFileFormat",
-      "value" : "CSV"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.csvHeader",
-      "value" : "WITH_HEADER"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.csvReplaceNewLines",
-      "value" : true
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.csvReplaceNewLinesString",
-      "value" : ""
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.csvCustomDelimiter",
-      "value" : "|"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.csvCustomEscape",
-      "value" : "\\"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.csvCustomQuote",
-      "value" : "\""
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.jsonMode",
-      "value" : "MULTIPLE_OBJECTS"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.textFieldPath",
-      "value" : "/text"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.textRecordSeparator",
-      "value" : "\\n"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.textFieldMissingAction",
-      "value" : "ERROR"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.textEmptyLineIfNull",
-      "value" : false
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.avroSchemaSource",
-      "value" : null
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.avroSchema",
-      "value" : null
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.registerSchema",
-      "value" : false
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.schemaRegistryUrlsForRegistration",
-      "value" : [ ]
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.schemaRegistryUrls",
-      "value" : [ ]
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.schemaLookupMode",
-      "value" : "SUBJECT"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.subject",
-      "value" : null
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.subjectToRegister",
-      "value" : null
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.schemaId",
-      "value" : null
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.avroCompression",
-      "value" : "NULL"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.binaryFieldPath",
-      "value" : "/"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.protoDescriptorFile",
-      "value" : null
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.messageType",
-      "value" : null
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.fileNameEL",
-      "value" : null
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.wholeFileExistsAction",
-      "value" : "TO_ERROR"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.includeChecksumInTheEvents",
-      "value" : false
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.checksumAlgorithm",
-      "value" : "MD5"
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.xmlPrettyPrint",
-      "value" : true
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.xmlValidateSchema",
-      "value" : false
-    }, {
-      "name" : "configs.dataGeneratorFormatConfig.xmlSchema",
-      "value" : null
-    }, {
-      "name" : "stageOnRecordError",
-      "value" : "TO_ERROR"
-    }, {
-      "name" : "stageRequiredFields",
-      "value" : [ ]
-    }, {
-      "name" : "stageRecordPreconditions",
-      "value" : [ ]
-    } ],
-    "uiInfo" : {
-      "description" : "",
-      "label" : "Local FS 1",
-      "xPos" : 941,
-      "yPos" : 51,
-      "stageType" : "TARGET"
-    },
-    "inputLanes" : [ "FieldMasker_01OutputLane15836784576570" ],
-    "outputLanes" : [ ],
-    "eventLanes" : [ ],
-    "services" : [ ]
   } ],
   "errorStage" : {
     "instanceName" : "Discard_ErrorStage",
@@ -830,20 +529,20 @@
     "services" : [ ]
   },
   "info" : {
-    "pipelineId" : "CustomProcessord765ccb1-cdd5-478b-9179-799bd8d47ee4",
-    "title" : "CustomProcessor",
+    "pipelineId" : "JavaProcessor50ed3de0-9b40-4005-bab5-caea68c84e6c",
+    "title" : "Java Processor",
     "description" : "",
-    "created" : 1583670600409,
-    "lastModified" : 1583700676343,
+    "created" : 1583736212997,
+    "lastModified" : 1583745115790,
     "creator" : "admin",
     "lastModifier" : "admin",
     "lastRev" : "0",
-    "uuid" : "b41de282-22ff-4747-a2cf-748786201d0e",
+    "uuid" : "7ec15531-db18-474c-a214-562bbda862b9",
     "valid" : false,
     "metadata" : {
       "labels" : [ ]
     },
-    "name" : "CustomProcessord765ccb1-cdd5-478b-9179-799bd8d47ee4",
+    "name" : "JavaProcessor50ed3de0-9b40-4005-bab5-caea68c84e6c",
     "sdcVersion" : "3.9.0",
     "sdcId" : "4065838f-4d92-11ea-b056-bd21cad9f124"
   },
@@ -1151,74 +850,22 @@
   "valid" : false,
   "issues" : {
     "stageIssues" : {
-      "com_streamsets_pipeline_stage_processor_jython_JythonDProcessor" : [ {
+      "Directory_01" : [ {
         "count" : 1,
         "level" : "STAGE",
-        "instanceName" : "com_streamsets_pipeline_stage_processor_jython_JythonDProcessor",
+        "instanceName" : "Directory_01",
         "antennaDoctorMessages" : null,
-        "serviceName" : null,
-        "additionalInfo" : null,
-        "configName" : null,
-        "configGroup" : null,
-        "message" : "VALIDATION_0006 - Stage definition does not exist, library 'streamsets-datacollector-jython_2_7-lib', name 'com_streamsets_pipeline_stage_processor_jython_JythonDProcessor', version '3'"
-      } ],
-      "JythonEvaluator_01" : [ {
-        "count" : 1,
-        "level" : "STAGE",
-        "instanceName" : "JythonEvaluator_01",
-        "antennaDoctorMessages" : null,
-        "serviceName" : null,
-        "additionalInfo" : null,
-        "configName" : null,
-        "configGroup" : null,
-        "message" : "CONTAINER_0901 - Could not find stage definition for 'streamsets-datacollector-jython_2_7-lib:com_streamsets_pipeline_stage_processor_jython_JythonDProcessor'"
-      }, {
-        "count" : 1,
-        "level" : "STAGE",
-        "instanceName" : "JythonEvaluator_01",
-        "antennaDoctorMessages" : null,
-        "serviceName" : null,
-        "additionalInfo" : null,
-        "configName" : null,
-        "configGroup" : null,
-        "message" : "CREATION_006 - Stage definition not found Library 'streamsets-datacollector-jython_2_7-lib' Stage 'com_streamsets_pipeline_stage_processor_jython_JythonDProcessor' Version '3'"
-      }, {
-        "count" : 1,
-        "level" : "STAGE",
-        "instanceName" : "JythonEvaluator_01",
-        "antennaDoctorMessages" : null,
-        "serviceName" : null,
-        "additionalInfo" : null,
-        "configName" : null,
-        "configGroup" : "JythonEvaluator_01",
-        "message" : "VALIDATION_0006 - Stage definition does not exist, library 'streamsets-datacollector-jython_2_7-lib', name 'com_streamsets_pipeline_stage_processor_jython_JythonDProcessor', version '3'"
-      }, {
-        "count" : 1,
-        "level" : "STAGE",
-        "instanceName" : "JythonEvaluator_01",
-        "antennaDoctorMessages" : null,
-        "serviceName" : null,
-        "additionalInfo" : null,
-        "configName" : null,
-        "configGroup" : null,
-        "message" : "VALIDATION_0006 - Stage definition does not exist, library 'streamsets-datacollector-jython_2_7-lib', name 'com_streamsets_pipeline_stage_processor_jython_JythonDProcessor', version '3'"
-      } ],
-      "StreamSelector_01" : [ {
-        "count" : 1,
-        "level" : "STAGE",
-        "instanceName" : "StreamSelector_01",
-        "antennaDoctorMessages" : null,
-        "serviceName" : null,
         "additionalInfo" : {
-          "openStreams" : [ "StreamSelector_01OutputLane1583676552194" ]
+          "openStreams" : [ "Directory_01OutputLane15836731079590" ]
         },
+        "serviceName" : null,
         "configName" : null,
         "configGroup" : null,
         "message" : "VALIDATION_0011 - Stage has open output streams"
       } ]
     },
-    "issueCount" : 6,
+    "issueCount" : 1,
     "pipelineIssues" : [ ]
   },
-  "previewable" : false
+  "previewable" : true
 }

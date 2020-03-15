@@ -1,0 +1,18 @@
+{
+  "pipelineId" : "JavaProcessor50ed3de0-9b40-4005-bab5-caea68c84e6c",
+  "title" : "Java Processor",
+  "description" : "",
+  "created" : 1583736212997,
+  "lastModified" : 1583745162219,
+  "creator" : "admin",
+  "lastModifier" : "admin",
+  "lastRev" : "0",
+  "uuid" : "e01c0bfe-4967-4acd-94a2-00d1ee2828a9",
+  "valid" : false,
+  "metadata" : {
+    "labels" : [ ]
+  },
+  "name" : "JavaProcessor50ed3de0-9b40-4005-bab5-caea68c84e6c",
+  "sdcVersion" : "3.9.0",
+  "sdcId" : "4065838f-4d92-11ea-b056-bd21cad9f124"
+}

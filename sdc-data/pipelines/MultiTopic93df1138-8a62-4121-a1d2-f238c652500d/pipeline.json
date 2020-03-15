@@ -4,7 +4,7 @@
   "pipelineId" : "MultiTopic93df1138-8a62-4121-a1d2-f238c652500d",
   "title" : "MultiTopic",
   "description" : "",
-  "uuid" : "a286e8d0-062b-418c-9541-840cd7f20e67",
+  "uuid" : "5e65dfab-8b61-47e0-a7e3-6aafec6c185e",
   "configuration" : [ {
     "name" : "executionMode",
     "value" : "STANDALONE"
@@ -693,7 +693,7 @@
     "uiInfo" : {
       "description" : "",
       "label" : "Local FS 1",
-      "xPos" : 467,
+      "xPos" : 465.95904541015625,
       "yPos" : 162,
       "stageType" : "TARGET"
     },
@@ -725,11 +725,11 @@
     "title" : "MultiTopic",
     "description" : "",
     "created" : 1581763341755,
-    "lastModified" : 1582223513010,
+    "lastModified" : 1582223515590,
     "creator" : "admin",
     "lastModifier" : "admin",
     "lastRev" : "0",
-    "uuid" : "98978504-7c70-41e6-84a8-ceccbd76b010",
+    "uuid" : "a286e8d0-062b-418c-9541-840cd7f20e67",
     "valid" : true,
     "metadata" : {
       "labels" : [ ]
@@ -1041,9 +1041,9 @@
   },
   "valid" : true,
   "issues" : {
-    "pipelineIssues" : [ ],
+    "stageIssues" : { },
     "issueCount" : 0,
-    "stageIssues" : { }
+    "pipelineIssues" : [ ]
   },
   "previewable" : true
 }

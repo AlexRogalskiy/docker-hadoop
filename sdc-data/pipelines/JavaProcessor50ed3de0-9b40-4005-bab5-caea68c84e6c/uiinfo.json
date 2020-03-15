@@ -1,0 +1,26 @@
+{
+  "Directory_01" : {
+    "yPos" : 51,
+    "stageType" : "SOURCE",
+    "rawSource" : {
+      "configuration" : [ {
+        "name" : "fileName"
+      } ]
+    },
+    "description" : "",
+    "label" : "Directory 1",
+    "xPos" : 61
+  },
+  ":pipeline:" : {
+    "previewConfig" : {
+      "previewSource" : "CONFIGURED_SOURCE",
+      "batchSize" : 10,
+      "timeout" : 30000,
+      "writeToDestinations" : true,
+      "executeLifecycleEvents" : true,
+      "showHeader" : false,
+      "showFieldType" : true,
+      "rememberMe" : false
+    }
+  }
+}
