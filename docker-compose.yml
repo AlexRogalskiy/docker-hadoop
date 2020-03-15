@@ -64,6 +64,9 @@ services:
     volumes:
       - ./sdc-data:/data
       - ./credentials:/opt/credentials  # StreamSets container
+      - ./user-libs:/opt/streamsets-datacollector-3.9.0/user-libs
+      - ./user-libs:/opt/streamsets-datacollector-3.9.0/streamsets-libs-extras
+      - ./user-libs:/opt/streamsets-datacollector-user-libs
 
 volumes:
   hadoop_namenode:
