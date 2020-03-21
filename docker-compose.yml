@@ -68,6 +68,12 @@ services:
       - ./user-libs:/opt/streamsets-datacollector-3.9.0/streamsets-libs-extras
       - ./user-libs:/opt/streamsets-datacollector-user-libs
 
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    command: redis-server
+
 volumes:
   hadoop_namenode:
   hadoop_datanode:
