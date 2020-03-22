@@ -74,6 +74,11 @@ services:
       - 6379:6379
     command: redis-server
 
+  spring:
+    image: docker-spring-boot
+    ports:
+      - 8080:8080
+
 volumes:
   hadoop_namenode:
   hadoop_datanode:

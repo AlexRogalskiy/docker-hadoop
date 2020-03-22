@@ -3,12 +3,12 @@
   "title" : "Java Processor",
   "description" : "",
   "created" : 1583736212997,
-  "lastModified" : 1583745162219,
+  "lastModified" : 1584910601571,
   "creator" : "admin",
   "lastModifier" : "admin",
   "lastRev" : "0",
-  "uuid" : "e01c0bfe-4967-4acd-94a2-00d1ee2828a9",
-  "valid" : false,
+  "uuid" : "25a65680-a2be-4f35-9fa2-67b3463dd290",
+  "valid" : true,
   "metadata" : {
     "labels" : [ ]
   },

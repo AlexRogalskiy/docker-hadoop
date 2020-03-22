@@ -4,7 +4,7 @@
   "pipelineId" : "MultiTopicHDFSe9a30333-20b1-4a03-816c-dd2cac57b853",
   "title" : "MultiTopicHDFS",
   "description" : "",
-  "uuid" : "f7dd0730-8987-48c1-8bc7-5cb923eb6426",
+  "uuid" : "c32a4912-98c3-4a01-82fc-2f50019e50da",
   "configuration" : [ {
     "name" : "executionMode",
     "value" : "STANDALONE"
@@ -538,7 +538,7 @@
       "value" : 0
     }, {
       "name" : "hdfsTargetConfigBean.maxFileSize",
-      "value" : 0
+      "value" : 2
     }, {
       "name" : "hdfsTargetConfigBean.idleTimeout",
       "value" : "${1 * HOURS}"
@@ -743,11 +743,11 @@
     "title" : "MultiTopicHDFS",
     "description" : "",
     "created" : 1582294150172,
-    "lastModified" : 1583742982338,
+    "lastModified" : 1584690696130,
     "creator" : "admin",
     "lastModifier" : "admin",
     "lastRev" : "0",
-    "uuid" : "677368ef-e020-4033-acbc-075e6c8bd64a",
+    "uuid" : "ea248dac-e905-482c-83e0-8850c115b1d5",
     "valid" : true,
     "metadata" : {
       "labels" : [ ]

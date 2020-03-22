@@ -1,6 +1,6 @@
 {
   "Directory_01" : {
-    "yPos" : 51,
+    "yPos" : 50,
     "stageType" : "SOURCE",
     "rawSource" : {
       "configuration" : [ {
@@ -9,7 +9,7 @@
     },
     "description" : "",
     "label" : "Directory 1",
-    "xPos" : 61
+    "xPos" : 60
   },
   ":pipeline:" : {
     "previewConfig" : {
@@ -22,5 +22,19 @@
       "showFieldType" : true,
       "rememberMe" : false
     }
+  },
+  "SampleProcessor_01" : {
+    "description" : "",
+    "label" : "Sample Processor 1",
+    "xPos" : 280,
+    "yPos" : 50,
+    "stageType" : "PROCESSOR"
+  },
+  "LocalFS_02" : {
+    "description" : "",
+    "label" : "Local FS 2",
+    "xPos" : 500,
+    "yPos" : 50,
+    "stageType" : "TARGET"
   }
 }

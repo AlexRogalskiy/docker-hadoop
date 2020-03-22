@@ -4,7 +4,7 @@
   "pipelineId" : "JavaProcessor50ed3de0-9b40-4005-bab5-caea68c84e6c",
   "title" : "Java Processor",
   "description" : "",
-  "uuid" : "e01c0bfe-4967-4acd-94a2-00d1ee2828a9",
+  "uuid" : "25a65680-a2be-4f35-9fa2-67b3463dd290",
   "configuration" : [ {
     "name" : "executionMode",
     "value" : "STANDALONE"
@@ -494,7 +494,7 @@
       "value" : "TO_ERROR"
     } ],
     "uiInfo" : {
-      "yPos" : 51,
+      "yPos" : 50,
       "stageType" : "SOURCE",
       "rawSource" : {
         "configuration" : [ {
@@ -503,10 +503,230 @@
       },
       "description" : "",
       "label" : "Directory 1",
-      "xPos" : 61
+      "xPos" : 60
     },
     "inputLanes" : [ ],
     "outputLanes" : [ "Directory_01OutputLane15836731079590" ],
+    "eventLanes" : [ ],
+    "services" : [ ]
+  }, {
+    "instanceName" : "SampleProcessor_01",
+    "library" : "sampleprocessor",
+    "stageName" : "com_example_stage_processor_sample_SampleDProcessor",
+    "stageVersion" : "1",
+    "configuration" : [ {
+      "name" : "config",
+      "value" : "default"
+    }, {
+      "name" : "stageOnRecordError",
+      "value" : "TO_ERROR"
+    }, {
+      "name" : "stageRequiredFields",
+      "value" : [ ]
+    }, {
+      "name" : "stageRecordPreconditions",
+      "value" : [ ]
+    } ],
+    "uiInfo" : {
+      "description" : "",
+      "label" : "Sample Processor 1",
+      "xPos" : 280,
+      "yPos" : 50,
+      "stageType" : "PROCESSOR"
+    },
+    "inputLanes" : [ "Directory_01OutputLane15836731079590" ],
+    "outputLanes" : [ "SampleProcessor_01OutputLane15847694901380" ],
+    "eventLanes" : [ ],
+    "services" : [ ]
+  }, {
+    "instanceName" : "LocalFS_02",
+    "library" : "streamsets-datacollector-basic-lib",
+    "stageName" : "com_streamsets_pipeline_stage_destination_localfilesystem_LocalFileSystemDTarget",
+    "stageVersion" : "3",
+    "configuration" : [ {
+      "name" : "configs.uniquePrefix",
+      "value" : "sdc-${sdc:id()}"
+    }, {
+      "name" : "configs.fileNameSuffix",
+      "value" : null
+    }, {
+      "name" : "configs.dirPathTemplateInHeader",
+      "value" : false
+    }, {
+      "name" : "configs.dirPathTemplate",
+      "value" : "/tmp/out/${YYYY()}-${MM()}-${DD()}-${hh()}"
+    }, {
+      "name" : "configs.timeZoneID",
+      "value" : "UTC"
+    }, {
+      "name" : "configs.timeDriver",
+      "value" : "${time:now()}"
+    }, {
+      "name" : "configs.maxRecordsPerFile",
+      "value" : 0
+    }, {
+      "name" : "configs.maxFileSize",
+      "value" : 0
+    }, {
+      "name" : "configs.idleTimeout",
+      "value" : "${1 * HOURS}"
+    }, {
+      "name" : "configs.compression",
+      "value" : "NONE"
+    }, {
+      "name" : "configs.otherCompression",
+      "value" : null
+    }, {
+      "name" : "configs.fileType",
+      "value" : "TEXT"
+    }, {
+      "name" : "configs.keyEl",
+      "value" : "${uuid()}"
+    }, {
+      "name" : "configs.lateRecordsLimit",
+      "value" : "${1 * HOURS}"
+    }, {
+      "name" : "configs.rollIfHeader",
+      "value" : false
+    }, {
+      "name" : "configs.rollHeaderName",
+      "value" : "roll"
+    }, {
+      "name" : "configs.lateRecordsAction",
+      "value" : "SEND_TO_ERROR"
+    }, {
+      "name" : "configs.lateRecordsDirPathTemplate",
+      "value" : "/tmp/late/${YYYY()}-${MM()}-${DD()}"
+    }, {
+      "name" : "configs.dataFormat",
+      "value" : "JSON"
+    }, {
+      "name" : "configs.hdfsPermissionCheck",
+      "value" : true
+    }, {
+      "name" : "configs.permissionEL",
+      "value" : null
+    }, {
+      "name" : "configs.skipOldTempFileRecovery",
+      "value" : false
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.charset",
+      "value" : "UTF-8"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.csvFileFormat",
+      "value" : "CSV"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.csvHeader",
+      "value" : "NO_HEADER"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.csvReplaceNewLines",
+      "value" : true
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.csvReplaceNewLinesString",
+      "value" : " "
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.csvCustomDelimiter",
+      "value" : "|"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.csvCustomEscape",
+      "value" : "\\"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.csvCustomQuote",
+      "value" : "\""
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.jsonMode",
+      "value" : "MULTIPLE_OBJECTS"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.textFieldPath",
+      "value" : "/text"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.textRecordSeparator",
+      "value" : "\\n"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.textFieldMissingAction",
+      "value" : "ERROR"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.textEmptyLineIfNull",
+      "value" : false
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.avroSchemaSource",
+      "value" : null
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.avroSchema",
+      "value" : null
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.registerSchema",
+      "value" : false
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.schemaRegistryUrlsForRegistration",
+      "value" : [ ]
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.schemaRegistryUrls",
+      "value" : [ ]
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.schemaLookupMode",
+      "value" : "SUBJECT"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.subject",
+      "value" : null
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.subjectToRegister",
+      "value" : null
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.schemaId",
+      "value" : null
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.avroCompression",
+      "value" : "NULL"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.binaryFieldPath",
+      "value" : "/"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.protoDescriptorFile",
+      "value" : null
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.messageType",
+      "value" : null
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.fileNameEL",
+      "value" : null
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.wholeFileExistsAction",
+      "value" : "TO_ERROR"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.includeChecksumInTheEvents",
+      "value" : false
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.checksumAlgorithm",
+      "value" : "MD5"
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.xmlPrettyPrint",
+      "value" : true
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.xmlValidateSchema",
+      "value" : false
+    }, {
+      "name" : "configs.dataGeneratorFormatConfig.xmlSchema",
+      "value" : null
+    }, {
+      "name" : "stageOnRecordError",
+      "value" : "TO_ERROR"
+    }, {
+      "name" : "stageRequiredFields",
+      "value" : [ ]
+    }, {
+      "name" : "stageRecordPreconditions",
+      "value" : [ ]
+    } ],
+    "uiInfo" : {
+      "description" : "",
+      "label" : "Local FS 2",
+      "xPos" : 500,
+      "yPos" : 50,
+      "stageType" : "TARGET"
+    },
+    "inputLanes" : [ "SampleProcessor_01OutputLane15847694901380" ],
+    "outputLanes" : [ ],
     "eventLanes" : [ ],
     "services" : [ ]
   } ],
@@ -533,12 +753,12 @@
     "title" : "Java Processor",
     "description" : "",
     "created" : 1583736212997,
-    "lastModified" : 1583745115790,
+    "lastModified" : 1584910596915,
     "creator" : "admin",
     "lastModifier" : "admin",
     "lastRev" : "0",
-    "uuid" : "7ec15531-db18-474c-a214-562bbda862b9",
-    "valid" : false,
+    "uuid" : "1299d810-b32d-406c-a204-b4c84049dfa3",
+    "valid" : true,
     "metadata" : {
       "labels" : [ ]
     },
@@ -847,24 +1067,10 @@
       } ]
     } ]
   },
-  "valid" : false,
+  "valid" : true,
   "issues" : {
-    "stageIssues" : {
-      "Directory_01" : [ {
-        "count" : 1,
-        "level" : "STAGE",
-        "instanceName" : "Directory_01",
-        "antennaDoctorMessages" : null,
-        "additionalInfo" : {
-          "openStreams" : [ "Directory_01OutputLane15836731079590" ]
-        },
-        "serviceName" : null,
-        "configName" : null,
-        "configGroup" : null,
-        "message" : "VALIDATION_0011 - Stage has open output streams"
-      } ]
-    },
-    "issueCount" : 1,
+    "stageIssues" : { },
+    "issueCount" : 0,
     "pipelineIssues" : [ ]
   },
   "previewable" : true
