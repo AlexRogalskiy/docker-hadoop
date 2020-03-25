@@ -27,7 +27,7 @@
     "description" : "",
     "label" : "Sample Processor 1",
     "xPos" : 280,
-    "yPos" : 50,
+    "yPos" : 52,
     "stageType" : "PROCESSOR"
   },
   "LocalFS_02" : {

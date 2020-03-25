@@ -1,7 +1,54 @@
 version: "3"
 
 services:
-  # HDFS container
+  kafka:
+    image: krisgeus/docker-kafka
+    environment:
+      ADVERTISED_HOST: kafka
+      LOG_RETENTION_HOURS: 1
+      AUTO_CREATE_TOPICS: "false"
+      KAFKA_CREATE_TOPICS: divolte:4:1
+      ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,INTERNAL://localhost:9093
+      LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
+      SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      INTER_BROKER: INTERNAL
+
+  divolte:
+    image: divolte/divolte-collector
+    environment:
+      DIVOLTE_KAFKA_BROKER_LIST: kafka:9092
+    ports:
+      - 8290:8290
+    depends_on:
+      - kafka
+
+  streamsets:
+    build:
+      context: "."
+      args:
+        SDC_LIBS: streamsets-datacollector-apache-kafka_2_0-lib,streamsets-datacollector-hdp_2_6-lib
+    environment:
+      DIVOLTE_KAFKA_BROKER_LIST: kafka:9092
+    ports:
+      - 18630:18630
+    volumes:
+      - ./sdc-data:/data
+      - ./credentials:/opt/credentials
+      - ./user-libs:/opt/streamsets-datacollector-3.9.0/user-libs
+      - ./user-libs:/opt/streamsets-datacollector-3.9.0/streamsets-libs-extras
+      - ./user-libs:/opt/streamsets-datacollector-user-libs
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    command: redis-server
+
+  cardservice:
+    image: docker-card-service
+    ports:
+      - 8080:8080
+
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
     container_name: namenode
@@ -16,7 +63,6 @@ services:
     env_file:
       - ./hadoop.env
 
-  # HDFS container
   datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
     container_name: datanode
@@ -28,56 +74,6 @@ services:
     env_file:
       - ./hadoop.env
 
-  # Kafka container
-  kafka:
-    image: krisgeus/docker-kafka
-    environment:
-      ADVERTISED_HOST: kafka
-      LOG_RETENTION_HOURS: 1
-      AUTO_CREATE_TOPICS: "false"
-      KAFKA_CREATE_TOPICS: divolte:4:1
-      ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,INTERNAL://localhost:9093
-      LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
-      SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
-      INTER_BROKER: INTERNAL
-
-  # Divolte container
-  divolte:
-    image: divolte/divolte-collector
-    environment:
-      DIVOLTE_KAFKA_BROKER_LIST: kafka:9092
-    ports:
-      - 8290:8290
-    depends_on:
-      - kafka
-
-  # StreamSets container
-  streamsets:
-    build:
-      context: "."
-      args:
-        SDC_LIBS: streamsets-datacollector-apache-kafka_2_0-lib,streamsets-datacollector-hdp_2_6-lib
-    environment:
-      DIVOLTE_KAFKA_BROKER_LIST: kafka:9092
-    ports:
-      - 18630:18630
-    volumes:
-      - ./sdc-data:/data
-      - ./credentials:/opt/credentials  # StreamSets container
-      - ./user-libs:/opt/streamsets-datacollector-3.9.0/user-libs
-      - ./user-libs:/opt/streamsets-datacollector-3.9.0/streamsets-libs-extras
-      - ./user-libs:/opt/streamsets-datacollector-user-libs
-
-  redis:
-    image: redis
-    ports:
-      - 6379:6379
-    command: redis-server
-
-  spring:
-    image: docker-spring-boot
-    ports:
-      - 8080:8080
 
 volumes:
   hadoop_namenode:

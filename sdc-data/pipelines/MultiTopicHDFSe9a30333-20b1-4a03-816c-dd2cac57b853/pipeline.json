@@ -4,7 +4,7 @@
   "pipelineId" : "MultiTopicHDFSe9a30333-20b1-4a03-816c-dd2cac57b853",
   "title" : "MultiTopicHDFS",
   "description" : "",
-  "uuid" : "c32a4912-98c3-4a01-82fc-2f50019e50da",
+  "uuid" : "e0185c23-7fb4-4e3b-8780-4a2cc98789bb",
   "configuration" : [ {
     "name" : "executionMode",
     "value" : "STANDALONE"
@@ -443,7 +443,7 @@
       "value" : null
     }, {
       "name" : "conf.dataFormat",
-      "value" : "AVRO"
+      "value" : "DATAGRAM"
     }, {
       "name" : "conf.brokerURI",
       "value" : "kafka:9092"
@@ -743,11 +743,11 @@
     "title" : "MultiTopicHDFS",
     "description" : "",
     "created" : 1582294150172,
-    "lastModified" : 1584690696130,
+    "lastModified" : 1584873735625,
     "creator" : "admin",
     "lastModifier" : "admin",
     "lastRev" : "0",
-    "uuid" : "ea248dac-e905-482c-83e0-8850c115b1d5",
+    "uuid" : "c32a4912-98c3-4a01-82fc-2f50019e50da",
     "valid" : true,
     "metadata" : {
       "labels" : [ ]
